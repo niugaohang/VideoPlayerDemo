@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "ViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -16,7 +16,20 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window=[[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor=[UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    //    系统栏
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.window.backgroundColor=[UIColor whiteColor];
+    
+    
+   ViewController  *viewController = [[ViewController alloc]init];
+    UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:viewController];
+    
+    self.window.rootViewController = nav;
+    
     return YES;
 }
 
@@ -41,5 +54,23 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
+//禁止横屏
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    if (_isFullScreen)
+    {
+        return UIInterfaceOrientationMaskLandscape;
+//        return UIInterfaceOrientationLandscapeRight | UIInterfaceOrientationMaskPortrait;
+    }
+    return UIInterfaceOrientationMaskPortrait;
+}
+//-(NSUInteger)supportedInterfaceOrientations
+//{
+//    return UIInterfaceOrientationMaskAllButUpsideDown;
+//}
+//
+//- (BOOL)shouldAutorotate
+//{
+//    return YES;
+//}
 @end
